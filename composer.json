@@ -1,6 +1,6 @@
 {
-    "name": "bonza/fdd",
-    "description": "支持PHP7.2语法，法大大接口类库",
+    "name": "strack/fdd",
+    "description": "继承bonza/fdd，支持PHP7.2语法，法大大接口类库",
     "type": "library",
     "keywords": [
         "fadada",
@@ -11,8 +11,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "bonza",
-            "email": "y.shi.guo@gmail.com"
+            "name": "weijer",
+            "email": "weiwei163@foxmail.com"
         }
     ],
     "minimum-stability": "stable",
