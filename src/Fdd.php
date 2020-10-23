@@ -37,6 +37,7 @@ use bonza\fdd\api\FddApi3;
  * @method threeElementVerifyMobile(...$string): array 三要素身份验证
  * @method companyDeposit(...$string): array 对企业信息实名存证
  * @method applyClientNumCert(...$string): array 编号证书申请
+ * @method verifySign(array $data): bool 回调验签
  *
  */
 class Fdd

@@ -90,15 +90,16 @@ class FddApi3 implements FddInterface
      *
      *  获取企业实名认证地址
      * @param string $customer_id 客户编号
-     * @param string $notify_url 是否允许用户页面修改1 允许，2 不允许
-     * @param string $legal_info 回调地址
-     * @param int $page_modify 企业负责人身份 :1. 法人，2. 代理人
-     * @param int $company_principal_type 法人信息
+     * @param string $notify_url 异步通知地址
+     * @param array $extraParam 额外参数
+     * @param int $page_modify 是否允许用户页面修改1 允许，2 不允许
+     * @param int $company_principal_type 企业负责人身份 :1. 法人，2. 代理人
      * @return array
      */
-    public function getCompanyVerifyUrl($customer_id, $notify_url, $legal_info, $page_modify = 1, $company_principal_type = 1): array
+    public function getCompanyVerifyUrl($customer_id, $notify_url, $extraParam = [], $page_modify = 1, $company_principal_type = 1): array
     {
-        $personalParams = compact('company_principal_type', 'customer_id', 'legal_info', 'notify_url', 'page_modify');
+        $personalParams = compact('company_principal_type', 'customer_id', 'notify_url', 'page_modify');
+        $personalParams = array_merge($personalParams, $extraParam);
         $msg_digest = $this->getMsgDigest($personalParams);
         $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'get_company_verify_url' . '.api', 'post', $params);
@@ -109,19 +110,17 @@ class FddApi3 implements FddInterface
      *  获取个人实名认证地址
      * @param string $customer_id 客户编号
      * @param string $notify_url 回调地址 异步通知认证结果
+     * @param array $extraParam 额外参数
      * @param string $verified_way 实名认证套餐类型
      * @param string $page_modify 是否允许用户页面修改1 允许，2 不允许
      * @param string $cert_flag 是否认证成功后自动申请实名证书参数值为 “0”：不申请，参数值为“1”：自动申请
-     * @param string $mobile 手机号
      * @param int $customer_ident_type 证件类型，0，身份证
-     * @param string $customer_ident_no 证件号码
-     * @param string $customer_name 姓名
-     * @param string $ident_front_path 身份证证明照地址
      * @return array
      */
-    public function getPersonVerifyUrl($customer_id, $notify_url, $mobile = '', $customer_name = '', $customer_ident_no = '', $ident_front_path = '', $verified_way = '1', $page_modify = '1', $cert_flag = '1', $customer_ident_type = 0): array
+    public function getPersonVerifyUrl($customer_id, $notify_url, $extraParam = [], $verified_way = '1', $page_modify = '1', $cert_flag = '1', $customer_ident_type = 0): array
     {
         $personalParams = compact('customer_id', 'notify_url', 'verified_way', 'page_modify', 'cert_flag', 'customer_ident_no', 'customer_ident_type', 'customer_name', 'mobile', 'ident_front_path');
+        $personalParams = array_merge($personalParams, $extraParam);
         $msg_digest = $this->getMsgDigest($personalParams);
         $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'get_person_verify_url' . '.api', 'post', $params);
@@ -724,4 +723,34 @@ class FddApi3 implements FddInterface
     }
 
 
+    /**
+     * 排除公共参数
+     * @param array $data
+     * @return array
+     */
+    private function excludeCommonParams(array $data)
+    {
+        $arr = ['appid', 'timestamp', 'v', 'sign', 'msg_digest'];
+        foreach ($data as $key => $value) {
+            if (in_array(strtolower($key), $arr)) {
+                unset($data[$key]);
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * 验签
+     * @param array $data
+     * @return bool
+     */
+    public function verifySign(array $data)
+    {
+        $timestamp = $data['timestamp'] ?? "";
+        $signNeedCheck = $data['sign'] ?? "";
+        $excludedData = $this->excludeCommonParams($data);
+        $this->timestamp = $timestamp;
+        $sign = $this->getMsgDigest($excludedData);
+        return strcmp($signNeedCheck, $sign) === 0;
+    }
 }
