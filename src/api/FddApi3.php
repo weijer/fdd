@@ -82,7 +82,7 @@ class FddApi3 implements FddInterface
         $personalParams = compact('account_type', 'open_id');
         $msg_digest = $this->getMsgDigest($personalParams);
         $commonParams = $this->getCommonParams($msg_digest);
-        $params = array_merge($commonParams , $personalParams);
+        $params = array_merge($commonParams, $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'account_register' . '.api', 'post', $params);
     }
 
@@ -100,7 +100,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('company_principal_type', 'customer_id', 'legal_info', 'notify_url', 'page_modify');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'get_company_verify_url' . '.api', 'post', $params);
     }
 
@@ -123,7 +123,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('customer_id', 'notify_url', 'verified_way', 'page_modify', 'cert_flag', 'customer_ident_no', 'customer_ident_type', 'customer_name', 'mobile', 'ident_front_path');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'get_person_verify_url' . '.api', 'post', $params);
     }
 
@@ -144,7 +144,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('cert_flag', 'customer_id', 'file_name', 'file_size', 'noper_time', 'original_sha25', 'preservation_name', 'transaction_id');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'hash_deposit' . '.api', 'get', $params);
     }
 
@@ -170,7 +170,7 @@ class FddApi3 implements FddInterface
 //        ]);
         $personalParams = compact('cert_flag', 'customer_id', 'document_type', 'idcard', 'mobile', 'mobile_essential_factor', 'name', 'preservation_data_provider', 'preservation_name', 'verified_type');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'person_deposit' . '.api', 'post', $params);
     }
 
@@ -193,7 +193,7 @@ class FddApi3 implements FddInterface
         $verify_element = strtoupper($verify_element[1]);
         $personalParams = compact('verify_element');//三要素（姓名、 身份证号码、手机号码
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'three_element_verify_mobile' . '.api', 'post', $params);
     }
 
@@ -207,7 +207,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('verified_serialno');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'find_personCertInfo' . '.api', 'post', $params);
     }
 
@@ -249,7 +249,7 @@ class FddApi3 implements FddInterface
         $verified_mod = '1';
         $personalParams = compact('company_name', 'company_principal_type', 'company_principal_verifie_msg', 'credit_cod', 'company_customer_id', 'document_type', 'company_preservation_data_provider', 'company_preservation_name', 'transaction_id', 'verified_mod');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'company_deposit' . '.api', 'post', $params);
     }
 
@@ -264,7 +264,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('verified_serialno');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'find_companyCertInfo' . '.api', 'post', $params);
     }
 
@@ -280,7 +280,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('customer_id', 'evidence_no');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'apply_client_numcert' . '.api', 'post', $params);
     }
 
@@ -297,7 +297,7 @@ class FddApi3 implements FddInterface
         $signature_img_base64 = $this->getImageToBase64($file_path);
         $personalParams = compact('customer_id', 'signature_img_base64');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'add_signature' . '.api', 'post', $params);
     }
 
@@ -313,7 +313,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('content', 'customer_id');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'custom_signature' . '.api', 'post', $params);
     }
 
@@ -334,12 +334,12 @@ class FddApi3 implements FddInterface
         $personalParams = [
             //业务参数
             'contract_id' => $contract_id,
-            'doc_title'   => $doc_title,
-            'doc_url '    => $doc_url,
-            'file'        => $file,
-            'doc_type'    => $doc_type,
+            'doc_title' => $doc_title,
+            'doc_url ' => $doc_url,
+            'file' => $file,
+            'doc_type' => $doc_type,
         ];
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'uploaddocs' . '.api', 'post', $params);
     }
 
@@ -359,11 +359,11 @@ class FddApi3 implements FddInterface
         $personalParams = [
             //业务参数
             'template_id' => $template_id,
-            'doc_url'     => $doc_url,
-            'file'        => new CURLFile($file),
-            'doc_type'    => $doc_type,
+            'doc_url' => $doc_url,
+            'file' => new CURLFile($file),
+            'doc_type' => $doc_type,
         ];
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'uploadtemplate' . '.api', 'post', $params);
     }
 
@@ -378,7 +378,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('template_id');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->baseUrl . 'view_template' . '.api' . '?' . http_build_query($params);
     }
 
@@ -393,7 +393,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('template_id');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->baseUrl . 'download_template' . '.api' . '?' . http_build_query($params);
     }
 
@@ -408,7 +408,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('template_id');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'template_delete' . '.api', 'post', $params);
     }
 
@@ -428,14 +428,14 @@ class FddApi3 implements FddInterface
         $msg_digest = $this->getMsgDigest(compact('template_id', 'contract_id'), $parameter_map);
         $personalParams = [
             //业务参数
-            'doc_title'     => $doc_title,
-            'template_id'   => $template_id,
-            'contract_id'   => $contract_id,
-            'font_size'     => $font_size,
+            'doc_title' => $doc_title,
+            'template_id' => $template_id,
+            'contract_id' => $contract_id,
+            'font_size' => $font_size,
             'parameter_map' => $parameter_map,
-            'font_type'     => $font_type,
+            'font_type' => $font_type,
         ];
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'generate_contract' . '.api', 'post', $params);
     }
 
@@ -454,7 +454,7 @@ class FddApi3 implements FddInterface
      * @param string $notify_url 异步通知URL
      * @return array
      */
-    public function extSignAuto($transaction_id, $contract_id, $customer_id, $client_role = '1', $doc_title = '', $position_type = '0', $sign_keyword = '', $keyword_strategy = '0',$notify_url = ''): array
+    public function extSignAuto($transaction_id, $contract_id, $customer_id, $client_role = '1', $doc_title = '', $position_type = '0', $sign_keyword = '', $keyword_strategy = '0', $notify_url = ''): array
     {
         $msg_digest = base64_encode(
             strtoupper(
@@ -471,17 +471,17 @@ class FddApi3 implements FddInterface
         );
         $personalParams = [
             //业务参数
-            'transaction_id'   => $transaction_id,
-            'contract_id'      => $contract_id,
-            'customer_id'      => $customer_id,
-            'client_role'      => $client_role,
-            'position_type'    => $position_type,
-            'sign_keyword'     => $sign_keyword,
-            'doc_title'        => $doc_title,
+            'transaction_id' => $transaction_id,
+            'contract_id' => $contract_id,
+            'customer_id' => $customer_id,
+            'client_role' => $client_role,
+            'position_type' => $position_type,
+            'sign_keyword' => $sign_keyword,
+            'doc_title' => $doc_title,
             'keyword_strategy' => $keyword_strategy,
-            'notify_url'       => $notify_url
+            'notify_url' => $notify_url
         ];
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'extsign_auto' . '.api', 'post', $params);
     }
 
@@ -497,7 +497,7 @@ class FddApi3 implements FddInterface
      * @param string $sign_keyword
      * @return string
      */
-    public function extSign($transaction_id, $contract_id, $customer_id, $doc_title, $return_url = '', $sign_keyword = '',$notify_url=''): string
+    public function extSign($transaction_id, $contract_id, $customer_id, $doc_title, $return_url = '', $sign_keyword = '', $notify_url = ''): string
     {
         $msg_digest = base64_encode(
             strtoupper(
@@ -515,12 +515,12 @@ class FddApi3 implements FddInterface
         $params = $this->getCommonParams($msg_digest) + [
                 //业务参数
                 'transaction_id' => $transaction_id,
-                'contract_id'    => $contract_id,
-                'customer_id'    => $customer_id,
-                'doc_title'      => $doc_title,
-                'return_url'     => $return_url,
-                'notify_url'     => $notify_url,
-                'sign_keyword'   => $sign_keyword,
+                'contract_id' => $contract_id,
+                'customer_id' => $customer_id,
+                'doc_title' => $doc_title,
+                'return_url' => $return_url,
+                'notify_url' => $notify_url,
+                'sign_keyword' => $sign_keyword,
             ];
         return $this->baseUrl . 'extsign' . '.api' . '?' . http_build_query($params);
     }
@@ -534,10 +534,10 @@ class FddApi3 implements FddInterface
     public function viewContract(string $contract_id): string
     {
         $msg_digest = $this->getMsgDigest(compact('contract_id'));
-        $params = array_merge($this->getCommonParams($msg_digest) , [
-                //业务参数
-                'contract_id' => $contract_id,//合同编号
-            ]);
+        $params = array_merge($this->getCommonParams($msg_digest), [
+            //业务参数
+            'contract_id' => $contract_id,//合同编号
+        ]);
         return $this->baseUrl . 'viewContract' . '.api' . '?' . http_build_query($params);
     }
 
@@ -550,10 +550,10 @@ class FddApi3 implements FddInterface
     public function downLoadContract(string $contract_id): string
     {
         $msg_digest = $this->getMsgDigest(compact('contract_id'));
-        $params = array_merge($this->getCommonParams($msg_digest) , [
-                //业务参数
-                'contract_id' => $contract_id,//合同编号
-            ]);
+        $params = array_merge($this->getCommonParams($msg_digest), [
+            //业务参数
+            'contract_id' => $contract_id,//合同编号
+        ]);
         return $this->baseUrl . 'downLoadContract' . '.api' . '?' . http_build_query($params);
     }
 
@@ -567,10 +567,10 @@ class FddApi3 implements FddInterface
     public function contractFiling($contract_id): array
     {
         $msg_digest = $this->getMsgDigest(compact('contract_id'));
-        $params = array_merge($this->getCommonParams($msg_digest) , [
-                //业务参数
-                'contract_id' => $contract_id,//合同编号
-            ]);
+        $params = array_merge($this->getCommonParams($msg_digest), [
+            //业务参数
+            'contract_id' => $contract_id,//合同编号
+        ]);
         return $this->curl->sendRequest($this->baseUrl . 'contractFiling' . '.api', 'post', $params);
     }
 
@@ -587,7 +587,7 @@ class FddApi3 implements FddInterface
     {
         $personalParams = compact('customer_id', 'verified_serialno');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'apply_cert' . '.api', 'post', $params);
     }
 
@@ -604,7 +604,7 @@ class FddApi3 implements FddInterface
 
         $personalParams = compact('customer_id', 'verified_serialno');
         $msg_digest = $this->getMsgDigest($personalParams);
-        $params = array_merge($this->getCommonParams($msg_digest) , $personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'apply_numcert' . '.api', 'post', $params);
     }
 
@@ -617,10 +617,10 @@ class FddApi3 implements FddInterface
     public function getFile($uuid): array
     {
         $msg_digest = $this->getMsgDigest(compact('uuid'));
-        $params = array_merge($this->getCommonParams($msg_digest) , [
-                //业务参数
-                'uuid' => $uuid,
-            ]);
+        $params = array_merge($this->getCommonParams($msg_digest), [
+            //业务参数
+            'uuid' => $uuid,
+        ]);
         return $this->curl->sendRequest($this->baseUrl . 'get_file' . '.api', 'post', $params);
     }
 
@@ -702,9 +702,9 @@ class FddApi3 implements FddInterface
     {
         return [
             //公共参数
-            'app_id'     => $this->appId,
-            'timestamp'  => $this->timestamp,
-            'v'          => $this->version,
+            'app_id' => $this->appId,
+            'timestamp' => $this->timestamp,
+            'v' => $this->version,
             'msg_digest' => $msg_digest,
         ];
     }
