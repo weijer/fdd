@@ -23,7 +23,7 @@ Interface FddInterface
     public function viewTemplate(string $template_id): string;/*查看合同模版*/
     public function templateDownload($template_id);/*下载合同模板*/
     public function templateDelete($template_id): array;/*模板删除*/
-    public function generateContract($doc_title, $template_id, $contract_id, $font_size, $parameter_map, $font_type): array;/*模板填充*/
+    public function generateContract($doc_title, $template_id, $contract_id, $parameter_map, $extra_param = []): array;/*模板填充*/
     public function extSignAuto($transaction_id, $contract_id, $customer_id, $client_role, $doc_title, $position_type, $sign_keyword, $keyword_strategy): array;/*自动签署*/
     public function extSign(string $transaction_id, string $contract_id, string $customer_id, string $doc_title, $return_url = '', $sign_keyword = ''): string;/*手动签署接口*/
     public function viewContract(string $contract_id): string;/*此接口将打开页面 合同查看*/

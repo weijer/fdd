@@ -414,26 +414,24 @@ class FddApi3 implements FddInterface
     /**
      *
      *  模板填充
-     * @param string $doc_title 文档标题合同标题
+     * @param string $doc_title 文档标题
      * @param string $template_id 模板编号
      * @param string $contract_id 合同编号
-     * @param string $font_size 字体大小
      * @param string $parameter_map 填充内容
-     * @param string $font_type 字体类型
+     * @param array $extra_param
      * @return array
      */
-    public function generateContract($doc_title, $template_id, $contract_id, $font_size, $parameter_map, $font_type): array
+    public function generateContract($doc_title, $template_id, $contract_id, $parameter_map, $extra_param = []): array
     {
         $msg_digest = $this->getMsgDigest(compact('template_id', 'contract_id'), $parameter_map);
         $personalParams = [
-            //业务参数
             'doc_title' => $doc_title,
             'template_id' => $template_id,
             'contract_id' => $contract_id,
-            'font_size' => $font_size,
             'parameter_map' => $parameter_map,
-            'font_type' => $font_type,
         ];
+        $personalParams = array_merge($personalParams, $extra_param);
+
         $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
         return $this->curl->sendRequest($this->baseUrl . 'generate_contract' . '.api', 'post', $params);
     }
