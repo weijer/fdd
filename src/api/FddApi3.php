@@ -751,4 +751,41 @@ class FddApi3 implements FddInterface
         $sign = $this->getMsgDigest($excludedData);
         return strcmp($signNeedCheck, $sign) === 0;
     }
+
+    /**
+     * 企业 授权给个人/取消授权
+     * @param $companyId
+     * @param $personId
+     * @param int $operateType
+     * @return array
+     */
+    public function authorization($companyId, $personId, $operateType = 1)
+    {
+        $personalParams = compact('companyId', 'personId', 'operateType');
+        $msg_digest = $this->getMsgDigest($personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
+        return $this->curl->sendRequest($this->baseUrl . 'authorization' . '.api', 'post', $params);
+    }
+
+    /**
+     * 合同签署回调验签
+     * @param array $data
+     * @return bool
+     */
+    public function contractCallBackVerifySign(array $data)
+    {
+        try {
+            $timestamp = $data['timestamp'];
+            $signNeedCheck = $data['msg_digest'];
+            $excludedData = [
+                'transaction_id' => $data['transaction_id']
+            ];
+            $this->timestamp = $timestamp;
+            $sign = $this->getMsgDigest($excludedData);
+            $flag = strcmp($signNeedCheck, $sign) === 0;
+        } catch (\Throwable $e) {
+            $flag = false;
+        }
+        return $flag;
+    }
 }

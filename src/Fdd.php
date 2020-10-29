@@ -38,6 +38,8 @@ use bonza\fdd\api\FddApi3;
  * @method companyDeposit(...$string): array 对企业信息实名存证
  * @method applyClientNumCert(...$string): array 编号证书申请
  * @method verifySign(array $data): bool 回调验签
+ * @method authorization($companyId, $personId, $operateType = 1) 授权/取消授权
+ * @method contractCallBackVerifySign(array  $data): bool 合同签署回调验签
  *
  */
 class Fdd
