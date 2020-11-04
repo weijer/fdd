@@ -119,7 +119,7 @@ class FddApi3 implements FddInterface
      */
     public function getPersonVerifyUrl($customer_id, $notify_url, $extraParam = [], $verified_way = '1', $page_modify = '1', $cert_flag = '1', $customer_ident_type = 0): array
     {
-        $personalParams = compact('customer_id', 'notify_url', 'verified_way', 'page_modify', 'cert_flag', 'customer_ident_no', 'customer_ident_type', 'customer_name', 'mobile', 'ident_front_path');
+        $personalParams = compact('customer_id', 'notify_url', 'verified_way', 'page_modify', 'cert_flag', 'customer_ident_type');
         $personalParams = array_merge($personalParams, $extraParam);
         $msg_digest = $this->getMsgDigest($personalParams);
         $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
