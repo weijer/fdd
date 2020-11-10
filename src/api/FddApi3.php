@@ -571,6 +571,21 @@ class FddApi3 implements FddInterface
         return $this->curl->sendRequest($this->baseUrl . 'contractFiling' . '.api', 'post', $params);
     }
 
+    /**
+     * 合同状态查询
+     * @param $contract_id
+     * @return array
+     */
+    public function contractStatus($contract_id): array
+    {
+        $msg_digest = $this->getMsgDigest(compact('contract_id'));
+        $params = array_merge($this->getCommonParams($msg_digest), [
+            //业务参数
+            'contract_id' => $contract_id,//合同编号
+        ]);
+        return $this->curl->sendRequest($this->baseUrl . 'contract_status' . '.api', 'post', $params);
+    }
+
 
     /**
      *
