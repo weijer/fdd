@@ -40,7 +40,8 @@ use bonza\fdd\api\FddApi3;
  * @method verifySign(array $data): bool 回调验签
  * @method authorization($companyId, $personId, $operateType = 1) 授权/取消授权
  * @method contractCallBackVerifySign(array  $data): bool 合同签署回调验签
- * * @method contractStatus($contractId): array 合同状态查询
+ * @method contractStatus($contractId): array 合同状态查询
+ * @method getTemplateKeys($templateId): array 查看合同模板可用keys
  *
  */
 class Fdd

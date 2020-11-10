@@ -412,6 +412,19 @@ class FddApi3 implements FddInterface
     }
 
     /**
+     * 查看合同模版可用key
+     * @param $template_id
+     * @return array
+     */
+    public function getTemplateKeys($template_id): array
+    {
+        $personalParams = compact('template_id');
+        $msg_digest = $this->getMsgDigest($personalParams);
+        $params = array_merge($this->getCommonParams($msg_digest), $personalParams);
+        return $this->curl->sendRequest($this->baseUrl . 'get_pdftemplate_keys' . '.api', 'post', $params);
+    }
+
+    /**
      *
      *  模板填充
      * @param string $doc_title 文档标题
