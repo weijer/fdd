@@ -42,7 +42,7 @@ use bonza\fdd\api\FddApi3;
  * @method contractCallBackVerifySign(array  $data): bool 合同签署回调验签
  * @method contractStatus($contractId): array 合同状态查询
  * @method getTemplateKeys($templateId): array 查看合同模板可用keys
- *
+ * @method beforeAuthSign($transaction_id, $contract_id, $customer_id, $return_url = '', $notify_url = ''): array 查看合同模板可用keys
  */
 class Fdd
 {
